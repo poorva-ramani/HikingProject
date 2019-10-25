@@ -5,21 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Project 1 Practice</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="app.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <!-- added Bulma cdn -->
-
+    <title>Project 1 - Trails</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel = "stylesheet" src = "/assets/css"> <!--add style file(s) to src-->
+</head>
 <body>
-    <div>    
-            <input id="searchInput" type="text" name="search"/>   
-        <button id="searchButton" >
-            Search
-        </button>
-        <div class="results"></div>
+    <!--add background image here-->
+    <div class = "container">
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <a href = "results.html" id = "searchBtn" class = "waves-effect waves-light btn-large" type = "submit">Search</a>
+                    <div class="input-field col s6">
+                        <input placeholder="Placeholder" id="searchInp" type="text" class="validate">
+                        <label for="searchInp"></label>
+                        </div>
+                        <div class="results"></div>
+                </div>
+            </form>
+        </div>
     </div>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="app.js"></script><!--add functions file(s) to src-->
 </body>
 
 </html>

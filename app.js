@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    var searchInput = $('#searchInput');
-    var searchButton = $('#searchButton');
+    var searchInput = $('#searchInp');
+    var searchButton = $('#searchBtn');
     var APIKEY = '200624582-ef03dfcbf90f2bd9243bdef3d1acb99b';
     searchButton.click(function (e) {
         e.preventDefault();
