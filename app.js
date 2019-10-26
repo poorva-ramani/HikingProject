@@ -2,9 +2,12 @@ $(document).ready(function () {
     var searchInput = $('#searchInp');
     var searchButton = $('#searchBtn');
     var APIKEY = '200624582-ef03dfcbf90f2bd9243bdef3d1acb99b';
+    $(".results").hide();
     searchButton.click(function (e) {
         e.preventDefault();
-        var address = searchInput.val();
+        address = searchInput.val();
+        $(".searchBox").hide();
+        $(".results").show();
         var geoCodeApi = {
             "async": true,
             "crossDomain": true,
@@ -29,18 +32,20 @@ $(document).ready(function () {
             }
             $.ajax(settings).done(function (result) {
                 console.log(result);
+                $('.myCard').clone().appendTo(".results");
                 var trails = result.trails;
-                // console.log(trails.length)
-                for (var i = 0; i < 5; i++) {
-                    var resultsDiv = $("<div>");
+                for (var i = 0; i < trails.length; i++) {
+                    // $(".card-content").eq(i).text();
+                    var resultsDiv = $(".card-content").eq(i);
                     var rating = $("<p>").text("Star rating: " + trails[i].starVotes);
                     var difficulty = $("<p>").text("difficulty: " + trails[i].difficulty);
-                    var image = $("<img>");
-                    image.attr("src", trails[i].imgMedium);
                     resultsDiv.append(image);
                     resultsDiv.append(rating);
                     resultsDiv.append(difficulty);
-                    $(".results").append(resultsDiv);
+                    // $(".results").append(resultsDiv);
+                    var image = $("<img>");
+                    image.attr("src", trails[i].imgMedium);
+                    $(".card-image").eq(i).append(image);
                 }
             });
         });
