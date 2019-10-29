@@ -17,7 +17,7 @@
 <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo right">Logo</a>
+            <a href="#" class="brand-logo right"><img id="logo" src="assets/img/logo.png"></a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li><a href="history.html">History</a></li>
                 <li><a href="favorites.html">Favorites</a></li>
@@ -55,71 +55,49 @@
         </div>
         <div class="results">
             <div class="row">
-                <div class="col s12 m4 l3">
+                <div class="col s6">
                     <!--Filters card-->
-                    <div class="card large">
+                    <div class="card filters">
                         <span id="errorMsg"></span>
                         <!--element to motify user if nothing is checked-->
                         <div class="intro-text center">
-                            <h5>Filters</h5>
+                            <h4>Filters</h4>
                         </div>
-                        <h6>Length</h6>
-                        <form class="filter-length" action="#">
-                            <p>
-                                <label for="lShort">
-                                    <input id="lShort" type="checkbox" checked="checked" />
-                                    <span>Whatever trail length</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label for="lMed">
-                                    <input id="lMed" type="checkbox" checked="checked" />
-                                    <span>Whatever trail length2</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label for="lLong">
-                                    <input id="lLong" type="checkbox" checked="checked" />
-                                    <span>Whatever trail length</span>
-                                </label>
-                            </p>
-                            <p>
-                                <label for="lExtra">
-                                    <input id="lExtra" type="checkbox" checked="checked" />
-                                    <span>Whatever trail length</span>
-                                </label>
-                            </p>
-                        </form>
+                        <h5>Length</h5>
+                        <form action="#">
+                                <p class="range-field">
+                                  <input type="range" id="lengthSlider" min="0" max="100" />
+                                </p>
+                              </form>
                         <br><br>
-                        <h6>Ratings</h6>
-                        <form class="filter-rating" action="#">
+                        <h5>Ratings</h5>
+                        <form action="#" class="filter-rating" >
                             <p>
                                 <label for="rating5">
-                                    <input id="rating5" type="checkbox" checked="checked" />
+                                    <input name="group1" class="with-gap" id="rating5" type="radio" />
                                     <span>*****</span>
                                 </label>
                             </p>
                             <p>
                                 <label for="rating4">
-                                    <input id="rating4" type="checkbox" checked="checked" />
+                                    <input name="group1" class="with-gap" id="rating4" type="radio" />
                                     <span>****</span>
                                 </label>
                             </p>
                             <p>
                                 <label for="rating3">
-                                    <input id="rating3" type="checkbox" checked="checked" />
-                                    <span>***</span>
-                                </label>
+                                    <input id="rating3" class="with-gap" name="group1" type="radio" />
+                                    <span>***</span> </label>
                             </p>
                             <p>
                                 <label for="rating2">
-                                    <input id="rating2" type="checkbox" checked="checked" />
+                                    <input name="group1" class="with-gap" id="rating2" type="radio" />
                                     <span>**</span>
                                 </label>
                             </p>
                             <p>
                                 <label for="rating1">
-                                    <input id="rating1" type="checkbox" checked="checked" />
+                                    <input name="group1" class="with-gap" id="rating1" type="radio" checked/>
                                     <span>*</span>
                                 </label>
                             </p>
@@ -137,13 +115,12 @@
                     <!--closes the card div (elements for 'filters')-->
                 </div>
                 <!--closes card column-->
-                <div class="col s12 m8 l9">
+                <div class="col s6">
                     <div class="text center">
-                        <h2 class="header">Results</h2>
                         <div class="col s12 m7">
                             <div class="row">
                                 <!--results cards display here-->
-                                <div class="searchResults">                                   
+                                <div class="searchResults">
                                 </div>
                             </div>
                         </div>
@@ -155,7 +132,8 @@
     </div>
     <!--closes container-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="app.js"></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./assets/js/app.js"></script>
 </body>
 
 </html>
