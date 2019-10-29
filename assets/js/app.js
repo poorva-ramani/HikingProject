@@ -1,10 +1,41 @@
 $(document).ready(function () {
     var searchInput = $('#searchInp');
     var searchButton = $('#searchBtn');
+    var trailLength='';
+    var stars='1';
     var APIKEY = '200624582-ef03dfcbf90f2bd9243bdef3d1acb99b';
     $(".results").hide();
-    searchButton.click(function (e) {
-        e.preventDefault();
+    $("#filterSearchBtn").on('click', function(){
+        // ratingFilter()
+        trailLength =  document.getElementById("lengthSlider");
+        console.log(trailLength.value);
+        if ($('#rating5').is(':checked')) {
+            stars = '5';
+             console.log(stars)
+         }
+         else if ($('#rating4').is(':checked')) {
+          stars = '4';
+             console.log(stars)
+         }
+         else if ($('#rating3').is(':checked')) {
+          stars = '3';
+          console.log(stars)
+
+         }
+         else if ($('#rating2').is(':checked')) {
+          stars = '2';
+          console.log(stars)
+
+         }
+         else if ($('#rating1').is(':checked')) {
+          stars = '1';
+          console.log(stars)
+         }
+        searchResults(trailLength.value,stars);
+    });
+  
+       function searchResults(trailLength,stars){
+        $('.searchResults').empty()     
         address = searchInput.val();
         $(".searchBox").hide();
         $(".results").show();
@@ -20,11 +51,9 @@ $(document).ready(function () {
             }
         }
         $.ajax(geoCodeApi).done(function (response) {
-            // console.log({ geoAPI: response });
-            // console.log("lat " + response.Results[0].lat + "long " + response.Results[0].lon)
             var LATITUDE = response.Results[0].lat;
             var LONGITUDE = response.Results[0].lon;
-            var queryURL = `https://www.hikingproject.com/data/get-trails?lat=${LATITUDE}&lon=${LONGITUDE}&key=${APIKEY}&minStars=4&maxResults=10`;
+            var queryURL = `https://www.hikingproject.com/data/get-trails?lat=${LATITUDE}&lon=${LONGITUDE}&key=${APIKEY}&minStars=${stars}&minLength=${trailLength}`;
             console.log(queryURL);
             var settings = {
                 "url": queryURL,
@@ -59,35 +88,10 @@ $(document).ready(function () {
                 }
             });
         });
-    });
+    }
 
-//this click function only to test if statements!!!
-   $("#filterSearchBtn").on('click', function(){
-       ratingFilter()
-   })
-   //var ratings = result.trails.stars
-   function ratingFilter() {
-   if (!$('#rating5').is(':checked') && !$('#rating4').is(':checked') && !$('#rating3').is(':checked')
-    && !$('#rating2').is(':checked') && !$('#rating1').is(':checked')) {
-       $('#errorMsg').html('Please have at least one option checked')
-       return;
-   }
-   if ($('#rating5').is(':checked')) {
-      // minStars == 5
-       console.log ('min5 checked')
-   }
-   if ($('#rating4').is(':checked')) {
-      // minStars == 4
-       console.log('min4 checked')
-   }
-   if ($('#rating3').is(':checked')) {
-      // minStars == 3
-   }
-   if ($('#rating2').is(':checked')) {
-      // minStars == 2
-   }
-   if ($('#rating1').is(':checked')) {
-      // minStars == 1
-   }
-   }
+    searchButton.click(function (e) {
+        e.preventDefault();    
+        searchResults();
+    });
 });
