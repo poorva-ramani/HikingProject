@@ -8,6 +8,9 @@
     <title>Project 1 - Trails</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
@@ -64,6 +67,13 @@
                             <h5>Filters</h5>
                         </div>
                         <h6>Length</h6>
+                        <form action="#">
+                            <p class="range-field"> 
+                              <input type="range" id="lengthSlider" min="0" max="100" />
+                            </p>
+                          </form>
+
+                        <!--
                         <form class="filter-length" action="#">
                             <p>
                                 <label for="lShort">
@@ -89,7 +99,8 @@
                                     <span>Whatever trail length</span>
                                 </label>
                             </p>
-                        </form>
+                        </form>-->
+                        
                         <br><br>
                         <h6>Ratings</h6>
                         <form class="filter-rating" action="#">
@@ -146,6 +157,7 @@
                                 <div class="searchResults">                                   
                                 </div>
                             </div>
+                            <div id="mapid"></div>
                         </div>
                     </div>
                 </div>
@@ -154,6 +166,10 @@
         </div>
     </div>
     <!--closes container-->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="app.js"></script>
 </body>

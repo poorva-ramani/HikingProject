@@ -3,6 +3,7 @@ $(document).ready(function () {
     var searchButton = $('#searchBtn');
     var APIKEY = '200624582-ef03dfcbf90f2bd9243bdef3d1acb99b';
     $(".results").hide();
+
     searchButton.click(function (e) {
         e.preventDefault();
         address = searchInput.val();
@@ -30,21 +31,27 @@ $(document).ready(function () {
                 "url": queryURL,
                 "method": "GET",
             }
+            var mymap = L.map('mapid').setView([LATITUDE, LONGITUDE], 13)
+
             $.ajax(settings).done(function (result) {
                 console.log(result);
                 var trails = result.trails;
                 for (var i = 0; i < trails.length; i++) { 
+                    var lat = trails[i].latitude
+                    var lon = trails[i].longitude
+
                     var card =$("<div class='card horizontal myCard'>");
                     var cardimage=$('<div class="card-image">'); 
                     var cardStacked=$('<div class="card-stacked">');
                     var cardContent=$('<div class="card-content">');
-                    var cardAction=$('<div class="card-action">');
-                                       
+                    var cardAction=$('<div class="card-action">')
+
                     card.append(cardimage);
                     card.append(cardStacked);
                     cardStacked.append(cardContent);
                     cardStacked.append(cardAction);
-                    cardAction.append($("<a>").text("This is a link"));
+                    cardAction.append($("<a>").text("See in Map"))
+
 
                     var image = $("<img>");
                     image.attr("src", trails[i].imgSmall);
@@ -56,7 +63,22 @@ $(document).ready(function () {
                     cardContent.append(difficulty);
 
                     $('.searchResults').append(card);
+
                 }
+
+                //map
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox.streets',
+                    accessToken: 'pk.eyJ1IjoiZGVicmFzcGFyciIsImEiOiJjazJiNmJ2cDUwMHg5M2NxY29yeGQ0cWowIn0._VZcZvPTCyIjGPjjz3FG7w'
+                }).addTo(mymap);
+                var circle = L.circle([LATITUDE, LONGITUDE], {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5,
+                    radius: 150
+                }).addTo(mymap);
             });
         });
     });
@@ -64,14 +86,10 @@ $(document).ready(function () {
 //this click function only to test if statements!!!
    $("#filterSearchBtn").on('click', function(){
        ratingFilter()
+       var slider = document.getElementById("lengthSlider")
+       console.log(slider.value)
    })
-   //var ratings = result.trails.stars
    function ratingFilter() {
-   if (!$('#rating5').is(':checked') && !$('#rating4').is(':checked') && !$('#rating3').is(':checked')
-    && !$('#rating2').is(':checked') && !$('#rating1').is(':checked')) {
-       $('#errorMsg').html('Please have at least one option checked')
-       return;
-   }
    if ($('#rating5').is(':checked')) {
       // minStars == 5
        console.log ('min5 checked')
