@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
     <link type="text/css" rel="stylesheet" href="./assets/css/styles.css" />
 </head>
 
@@ -25,7 +23,8 @@
             </ul>
         </div>
     </nav>
-    <div class="container">
+
+    <div class="container p7">
         <div class="searchBox">
             <!-- This is to input a city-->
             <div class="row d-flex justify-content-center">
@@ -36,20 +35,28 @@
             <!-- search button-->
             <div class="row d-flex justify-content-center">
                 <div class="col-5">
-                    <button id="searchBtn" class="btn waves-effect waves-light" type="submit" name="action">Submit
+
+
+                    <button id="searchBtn" class="#e57373 red lighten-2" type="submit" name="action">Submit
                     </button>
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Map
+                    <button class="#e57373 red lighten-2" type="submit" name="action">Map
                     </button>
                     <!-- dropdown miles -->
-                    <ul id="dropdown" class="dropdown-content">
+                     <ul id="dropdown" class="dropdown-content">
                         <li><a href="#">1</a></li>
                         <li><a href="#!">5</a></li>
                         <li><a href="#">15</a></li>
                         <li class="divider"></li>
                         <li><a href="#">25</a></li>
                     </ul>
-                    <a class="btn dropdown-button" href="#" data-activates="dropdown">Miles
-                        <i class="mdi-navigation-arrow-drop-down right"></i></a>
+                    <a class="btn dropdown-button" class="#e57373 red lighten-2" data-activates="dropdown">Miles
+                        <i class="mdi-navigation-arrow-drop-down right">
+
+
+                        </i>
+                    </a>                         
+
+
                 </div>
             </div>
         </div>
@@ -65,13 +72,13 @@
                         </div>
                         <h5>Length</h5>
                         <form action="#">
-                                <p class="range-field">
-                                  <input type="range" id="lengthSlider" min="0" max="100" />
-                                </p>
-                              </form>
+                            <p class="range-field">
+                                <input type="range" id="lengthSlider" min="0" max="100" />
+                            </p>
+                        </form>
                         <br><br>
                         <h5>Ratings</h5>
-                        <form action="#" class="filter-rating" >
+                        <form action="#" class="filter-rating">
                             <p>
                                 <label for="rating5">
                                     <input name="group1" class="with-gap" id="rating5" type="radio" />
@@ -97,7 +104,7 @@
                             </p>
                             <p>
                                 <label for="rating1">
-                                    <input name="group1" class="with-gap" id="rating1" type="radio" checked/>
+                                    <input name="group1" class="with-gap" id="rating1" type="radio" checked />
                                     <span>*</span>
                                 </label>
                             </p>
@@ -111,6 +118,8 @@
                             </button>
                             <!--button that clears 'filters' selections to default state (all checked)-->
                         </div>
+
+
                     </div>
                     <!--closes the card div (elements for 'filters')-->
                 </div>
@@ -132,7 +141,7 @@
     </div>
     <!--closes container-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="./assets/js/app.js"></script>
 </body>
 
