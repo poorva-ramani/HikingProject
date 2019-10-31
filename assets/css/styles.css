@@ -67,3 +67,8 @@ font-weight: bold;
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
+
+  /*map*/
+  #mapid { 
+    height: 210px; 
+  }
