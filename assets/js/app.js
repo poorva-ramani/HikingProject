@@ -4,6 +4,7 @@ $(document).ready(function () {
     var trailLength='';
     var stars='1';
     var APIKEY = '200624582-ef03dfcbf90f2bd9243bdef3d1acb99b';
+
     $(".results").hide();
     $("#filterSearchBtn").on('click', function(){
         // ratingFilter()
@@ -59,6 +60,10 @@ $(document).ready(function () {
                 "url": queryURL,
                 "method": "GET",
             }
+
+            //setting map view point
+            var mymap = L.map('mapid').setView([LATITUDE, LONGITUDE], 12)
+
             $.ajax(settings).done(function (result) {
                 console.log(result);
                 var trails = result.trails;
@@ -73,11 +78,21 @@ $(document).ready(function () {
                     card.append(cardStacked);
                     cardStacked.append(cardContent);
                     cardStacked.append(cardAction);
-                    cardAction.append($("<a>").text("SHOW IN MAP"));
+                    cardAction.append($("<a>").text("SHOW IN MAP")
+                    .addClass('cardLinks'));
 
                     var image = $("<img>");
                     image.attr("src", trails[i].imgSmall);
                     cardimage.append(image);
+
+                    var lat = trails[i].latitude;
+                    console.log(lat)
+                    // $('.cardLinks').click(function(event, i) {
+                    //     console.log(event.target)
+                        what(event, i)
+                    // })
+                    //trying to grab lat and lon on click
+
 
                     var name = $("<p class='name'>").text(trails[i].name);
                     var difficulty = $("<p>").text("Difficulty: " + trails[i].difficulty);
@@ -92,9 +107,30 @@ $(document).ready(function () {
 
                     $('.searchResults').append(card);
                 }
+
+                    //map
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox.streets',
+                    accessToken: 'pk.eyJ1IjoiZGVicmFzcGFyciIsImEiOiJjazJiNmJ2cDUwMHg5M2NxY29yeGQ0cWowIn0._VZcZvPTCyIjGPjjz3FG7w'
+                }).addTo(mymap);
+                var circle = L.circle([LATITUDE, LONGITUDE], {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5,
+                    radius: 150
+                }).addTo(mymap);
+
             });
         });
     }
+    
+    function what(event, i){
+        console.log(i)                   
+//         $('.cardLinks').click(function() {
+            console.log('worked')
+        }
 
     searchButton.click(function (e) {
         e.preventDefault();    
