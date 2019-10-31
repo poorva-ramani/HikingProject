@@ -7,16 +7,63 @@ body {
 img {
     min-width: 180px;
     height: 100px;
+    /* margin-top:30px; */
 }
 .filters{
    padding:30px;
-   width:400px;
+   height:650px;
 }
 .myCard{
     padding:10px;
-    width:400px;
+    /* width:70%; */
+}
+.card .card-content {
+  padding: 0px;
+  margin-left:25px;
+  margin-bottom:5px;
+}
+.card .card-action {
+padding: 5px 5px 0px 10px;
+}
+p{
+  font-size: 12px;
 }
 #logo{
     min-width: 120px;
     height: 65px;
 }
+
+.name{
+font-weight: bold;
+}
+
+.searchResults {
+    height: 690px; 
+    overflow: scroll;
+    background-color: #eee;
+    margin:30px; 
+}
+.result{
+    height:780px;
+    padding:20px;
+}
+/* for customizing scrollbar scrollbar */
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

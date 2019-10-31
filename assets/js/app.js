@@ -67,22 +67,28 @@ $(document).ready(function () {
                     var cardimage=$('<div class="card-image">'); 
                     var cardStacked=$('<div class="card-stacked">');
                     var cardContent=$('<div class="card-content">');
-                    var cardAction=$('<div class="card-action">');
+                    var cardAction=$('<div class="card-action center">');
                                        
                     card.append(cardimage);
                     card.append(cardStacked);
                     cardStacked.append(cardContent);
                     cardStacked.append(cardAction);
-                    cardAction.append($("<a>").text("This is a link"));
+                    cardAction.append($("<a>").text("SHOW IN MAP"));
 
                     var image = $("<img>");
                     image.attr("src", trails[i].imgSmall);
                     cardimage.append(image);
 
-                    var rating = $("<p>").text("Star rating: " + trails[i].starVotes);
-                    var difficulty = $("<p>").text("difficulty: " + trails[i].difficulty);
-                    cardContent.append(rating);
+                    var name = $("<p class='name'>").text(trails[i].name);
+                    var difficulty = $("<p>").text("Difficulty: " + trails[i].difficulty);
+                    var location = $("<p>").text("Location: " + trails[i].location);
+                    var length = $("<p>").text("Length: " + trails[i].length);
+                    var rating = $("<p>").text("Rating: " + trails[i].stars);
+                    cardContent.append(name);
+                    cardContent.append(location);
+                    cardContent.append(length);
                     cardContent.append(difficulty);
+                    cardContent.append(rating);
 
                     $('.searchResults').append(card);
                 }
