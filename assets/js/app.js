@@ -4,7 +4,9 @@ $(document).ready(function () {
     var trailLength='';
     var stars='1';
     var APIKEY = '200624582-ef03dfcbf90f2bd9243bdef3d1acb99b';
-
+    var latArray = [];
+    var lonArray = [];
+    
     $(".results").hide();
     $("#filterSearchBtn").on('click', function(){
         // ratingFilter()
@@ -67,13 +69,14 @@ $(document).ready(function () {
             $.ajax(settings).done(function (result) {
                 console.log(result);
                 var trails = result.trails;
+
                 for (var i = 0; i < trails.length; i++) { 
                     var card =$("<div class='card horizontal myCard'>");
                     var cardimage=$('<div class="card-image">'); 
                     var cardStacked=$('<div class="card-stacked">');
                     var cardContent=$('<div class="card-content">');
                     var cardAction=$('<div class="card-action center">');
-                                       
+
                     card.append(cardimage);
                     card.append(cardStacked);
                     cardStacked.append(cardContent);
@@ -84,15 +87,6 @@ $(document).ready(function () {
                     var image = $("<img>");
                     image.attr("src", trails[i].imgSmall);
                     cardimage.append(image);
-
-                    var lat = trails[i].latitude;
-                    console.log(lat)
-                    // $('.cardLinks').click(function(event, i) {
-                    //     console.log(event.target)
-                        what(event, i)
-                    // })
-                    //trying to grab lat and lon on click
-
 
                     var name = $("<p class='name'>").text(trails[i].name);
                     var difficulty = $("<p>").text("Difficulty: " + trails[i].difficulty);
@@ -105,8 +99,17 @@ $(document).ready(function () {
                     cardContent.append(difficulty);
                     cardContent.append(rating);
 
+                    //lats and lon to arrays
+                    latArray.push(trails[i].latitude)
+                    lonArray.push(trails[i].longitude)
+                    
                     $('.searchResults').append(card);
                 }
+                console.log(lonArray)
+                $('.cardLinks').click(function(e) {
+                    console.log(e.target)
+                    console.log(latArray)
+                });
 
                     //map
                 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -121,16 +124,10 @@ $(document).ready(function () {
                     fillOpacity: 0.5,
                     radius: 150
                 }).addTo(mymap);
-
             });
         });
     }
     
-    function what(event, i){
-        console.log(i)                   
-//         $('.cardLinks').click(function() {
-            console.log('worked')
-        }
 
     searchButton.click(function (e) {
         e.preventDefault();    
