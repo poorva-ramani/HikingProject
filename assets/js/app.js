@@ -1,3 +1,11 @@
+var modal = document.querySelector(".modal");
+var closeBtn = document.querySelector("#close-btn");
+var closeButton = document.querySelector(".close-button");
+var modalText = document.querySelector("#modal-text");
+var modalSubtext = document.querySelector("#modal-subtext");
+
+console.log(modal);
+
 $(document).ready(function () {
     var searchInput = $('#searchInp');
     var searchButton = $('#searchBtn');
@@ -35,9 +43,27 @@ $(document).ready(function () {
         searchResults(trailLength.value,stars);
     });
   
+     //code for popupmodal toggle
+ function toggleModal() {
+    console.log("toggle modal")
+    modal.classList.toggle("show-modal");
+  }
+
+//geolocation and hiking api    
        function searchResults(trailLength,stars){
         $('.searchResults').empty()     
         address = searchInput.val();
+         //code for popupmodal for blank searches
+            if (address === '')
+            {
+                console.log("I am here");
+                $('.searchResults').on("click", toggleModal());
+                modalText.textContent = " Blank Search !!!";
+                modalSubtext.textContent = 'Please Enter a valid city';
+                closeButton.addEventListener("click", toggleModal);
+                closeBtn.addEventListener("click", toggleModal); 
+                return;          
+            }
         $(".searchBox").hide();
         $(".results").show();
         var geoCodeApi = {
@@ -132,6 +158,7 @@ $(document).ready(function () {
             console.log('worked')
         }
 
+ //code to trigget search action
     searchButton.click(function (e) {
         e.preventDefault();    
         searchResults();

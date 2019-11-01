@@ -19,8 +19,8 @@
             <a href="#" class="brand-logo right"><img id="logo" src="assets/img/logo.png"></a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li><a href="history.html">History</a></li>
-                <li><a href="favorites.html">Favorites</a></li>
-                <li><a href="contact.html">contact</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
             </ul>
         </div>
     </nav>
@@ -36,9 +36,9 @@
             <!-- search button-->
             <div class="row d-flex justify-content-center">
                 <div class="col-5">
-                    <button id="searchBtn" class="#e57373 red lighten-2" type="submit" name="action">Submit
+                    <button id="searchBtn" class="red lighten-2 btn waves-effect">Submit
                     </button>
-                    <button class="#e57373 red lighten-2" type="submit" name="action">Map
+                    <button class="waves-effect btn red lighten-2"><a  href="https://www.google.com/maps" target="_blank">Map</a>
                     </button>
                     <!-- dropdown miles -->
                      <ul id="dropdown" class="dropdown-content">
@@ -47,11 +47,15 @@
                         <li><a href="#">15</a></li>
                         <li class="divider"></li>
                         <li><a href="#">25</a></li>
-                    </ul>
-                    <a class="btn dropdown-button" class="#e57373 red lighten-2" data-activates="dropdown">Miles
-                        <i class="mdi-navigation-arrow-drop-down right">
-                        </i>
-                    </a>                         
+                    </ul> 
+                    <div class="modal center-align">
+                        <div class="modal-content">
+                            <span class="close-button">&times;</span>
+                            <h4 id="modal-text"></h4>
+                            <h6 id="modal-subtext"></h6>
+                            <button id="close-btn" class="waves-effect btn red lighten-2">Close</button>
+                        </div>
+                    </div>                       
                 </div>
             </div>
         </div>
