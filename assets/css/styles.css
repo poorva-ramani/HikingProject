@@ -4,33 +4,53 @@ body {
     background-attachment: fixed;
 }
 
+.searchBox{
+  margin-top:200px;
+}
+
+a{
+  color: white;
+}
+
 img {
     min-width: 180px;
     height: 100px;
     /* margin-top:30px; */
 }
+
 .filters{
    padding:30px;
-   height:650px;
+   height:740px;
 }
+
 .myCard{
     padding:10px;
     /* width:70%; */
 }
+
 .card .card-content {
   padding: 0px;
   margin-left:25px;
   margin-bottom:5px;
 }
+
 .card .card-action {
 padding: 5px 5px 0px 10px;
 }
+
 p{
   font-size: 12px;
 }
+
 #logo{
     min-width: 120px;
     height: 65px;
+}
+
+input[type=search]:not(.browser-default){
+  background-color: white;
+  padding:5px;
+  color:black;
 }
 
 .name{
@@ -38,19 +58,21 @@ font-weight: bold;
 }
 
 .searchResults {
-    height: 690px; 
+    height: 650px; 
     overflow: scroll;
     background-color: #eee;
     margin:30px; 
 }
+
 .result{
-    height:780px;
-    padding:20px;
+    height:740px;
+    padding:10px;
 }
+
 /* for customizing scrollbar scrollbar */
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
   }
   
   /* Track */
@@ -70,7 +92,9 @@ font-weight: bold;
 
   /*map*/
   #mapid { 
-    height: 210px; 
+    height:300px;
+    margin:30px;
+
   }
 
 /* modal - copied from https://sabe.io/tutorials/how-to-create-modal-popup-box*/

@@ -7,9 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Project 1 - Trails</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin=""/>
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!--Let browser know website is optimized for mobile-->
     <link type="text/css" rel="stylesheet" href="./assets/css/styles.css" />
 </head>
 
@@ -17,6 +21,7 @@
     <nav>
         <div class="nav-wrapper">
             <a href="#" class="brand-logo right"><img id="logo" src="assets/img/logo.png"></a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li><a href="history.html">History</a></li>
                 <li><a href="contact.html">Contact Us</a></li>
@@ -25,29 +30,31 @@
         </div>
     </nav>
 
+  <!-- <div class="row">
+    <div class="input-field col s6">
+      <input value="Alvin" id="first_name2" type="text" class="validate">
+      <label class="active" for="first_name2">First Name</label>
+    </div>
+  </div> -->
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="history.html">History</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="feedback.html">Feedback</a></li>
+    </ul>
     <div class="container p7">
         <div class="searchBox">
             <!-- This is to input a city-->
-            <div class="row d-flex justify-content-center">
-                <div class="col-5">
-                    <input id="searchInp" type="text" placeholder="Enter Zip code or City....">
+            <form>
+            <div class="row">
+                <div class="input-field center">
+                    <input id="searchInp" class = "active" type="search" placeholder="Enter Zip code or City....">
                 </div>
-            </div>
-            <!-- search button-->
-            <div class="row d-flex justify-content-center">
-                <div class="col-5">
                     <button id="searchBtn" class="red lighten-2 btn waves-effect">Submit
                     </button>
-                    <button class="waves-effect btn red lighten-2"><a  href="https://www.google.com/maps" target="_blank">Map</a>
+                    <button class="waves-effect btn red lighten-2"><a href="https://www.google.com/maps"
+                            target="_blank">Map</a>
                     </button>
-                    <!-- dropdown miles -->
-                     <ul id="dropdown" class="dropdown-content">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#!">5</a></li>
-                        <li><a href="#">15</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">25</a></li>
-                    </ul> 
+            </div>
                     <div class="modal center-align">
                         <div class="modal-content">
                             <span class="close-button">&times;</span>
@@ -55,10 +62,9 @@
                             <h6 id="modal-subtext"></h6>
                             <button id="close-btn" class="waves-effect btn red lighten-2">Close</button>
                         </div>
-                    </div>                       
+                    </div> 
+                </form>                      
                 </div>
-            </div>
-        </div>
         <div class="results">
             <div class="row">
                 <div class="col s4">
@@ -127,25 +133,25 @@
                             <h5>Results</h5>
                         </div>
                         <div class="row">
-                        <!--results cards display here-->
-                        <div class="searchResults">
-                        </div>
+                            <!--results cards display here-->
+                            <div class="searchResults">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!--closes row-->
             <div class="mapDiv"></div>
-            <div id = 'mapid'></div>
+            <div id='mapid'>Map View:</div>
 
         </div>
     </div>
     <!--closes container-->
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-    crossorigin=""></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+        crossorigin=""></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./assets/js/app.js"></script>
 </body>
 
