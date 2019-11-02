@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <!--Let browser know website is optimized for mobile-->
     <link type="text/css" rel="stylesheet" href="./assets/css/styles.css" />
 </head>
+
 <body>
     <nav>
         <div class="nav-wrapper">
@@ -46,9 +48,9 @@
                 <div class="modal center-align">
                     <div class="modal-content">
                         <span class="close-button">&times;</span>
-                        <h4 id="modal-text"></h4>
-                        <h6 id="modal-subtext"></h6>
-                        <button id="close-btn" class="waves-effect btn red lighten-2">Close</button>
+                        <h4 class="modal-text"></h4>
+                        <h6 class="modal-subtext"></h6>
+                        <button class="close-btn waves-effect btn red lighten-2">Close</button>
                     </div>
                 </div> 
             </form>                      
@@ -61,14 +63,14 @@
                         <div class="intro-text center">
                             <h5>Filters</h5>
                         </div>
-                        <h6>Length</h6>
+                        <h6>Minimum Length of the Trail</h6>
                         <form action="#">
                             <p class="range-field">
-                                <input type="range" id="lengthSlider" min="0" max="100" />
+                                <input type="range" id="lengthSlider" value=5 min="0" max="100" />
                             </p>
                         </form>
                         <br><br>
-                        <h6>Ratings</h6>
+                        <h6>Minimum Ratings</h6>
                         <form action="#" class="filter-rating">
                             <p>
                                 <label for="rating5">
@@ -116,18 +118,26 @@
                 <div class="col s8">
                     <div class="card result">
                         <div class="intro-text center">
-                            <h5>Results</h5>
+                            <h5>Trails near <span id="city"></span></h5>
                         </div>
                         <div class="row">
                             <!--results cards display here-->
-                            <div class="searchResults">
-                            </div>
+                            <div class="searchResults">                              
+                            </div>                            
                         </div>
                     </div>
                 </div>
+                <div class="modal center-align" id="modal2">
+                        <div class="modal-content">
+                            <span class="close-button">&times;</span>
+                            <h4 class="modal-text"></h4>
+                            <h6 class="modal-subtext"></h6>
+                            <button class="close-btn waves-effect btn red lighten-2">Close</button>
+                        </div>
+                    </div> 
             </div>
             <!--closes row-->
-            <div id="mapDiv"></div>
+            <!-- <div id="mapDiv"></div> -->
             <div id='mapid'>Map View:</div>
 
         </div>

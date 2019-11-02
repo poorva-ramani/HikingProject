@@ -1,9 +1,10 @@
 var modal = document.querySelector(".modal");
-var closeBtn = document.querySelector("#close-btn");
+var closeBtn = document.querySelector(".close-btn");
 var closeButton = document.querySelector(".close-button");
-var modalText = document.querySelector("#modal-text");
-var modalSubtext = document.querySelector("#modal-subtext");
+var modalText = document.querySelector(".modal-text");
+var modalSubtext = document.querySelector(".modal-subtext");
 var mymap= L.map('mapid').setView([43, -83], 12);
+var address='';
 var i = 0;
 $(document).ready(function () {
     var searchInput = $('#searchInp');
@@ -14,6 +15,7 @@ $(document).ready(function () {
     $(".results").hide();
     $("#filterSearchBtn").on('click', function () {
         // ratingFilter()
+        address=$('#city').text();
         trailLength = document.getElementById("lengthSlider");
         if ($('#rating5').is(':checked')) {
             stars = '5';
@@ -30,8 +32,8 @@ $(document).ready(function () {
         else if ($('#rating1').is(':checked')) {
             stars = '1';
         }
-
-        searchResults(trailLength.value, stars);
+        $('.searchResults').empty()
+        resultCalc(trailLength.value, stars, address);
     });
 
     //code for popupmodal toggle
@@ -40,9 +42,9 @@ $(document).ready(function () {
     }
 
     //geolocation and hiking api    
-    function searchResults(address, trailLength, stars) {
+    function searchResults(trailLength, stars) {
         $('.searchResults').empty()
-        console.log(address)
+        address = searchInput.val();
         if (address === '') {
             $('.searchResults').on("click", toggleModal());
             modalText.textContent = " Blank Search !!!";
@@ -51,6 +53,11 @@ $(document).ready(function () {
             closeBtn.addEventListener("click", toggleModal);
             return;
         }
+        $('#city').text(address);
+        resultCalc(trailLength,stars,address)
+    }
+
+    function resultCalc(trailLength,stars,address){
         $(".searchBox").hide();
         $(".results").show();
         var geoCodeApi = {
@@ -71,34 +78,15 @@ $(document).ready(function () {
             var settings = {
                 "url": queryURL,
                 "method": "GET",
-            }
-            
-             //setting map view point
-            //  $.empty(mymap)
-            mymap.invalidateSize();
-            mymap = L.map('mapid').setView([LATITUDE, LONGITUDE], 12)
-             
-             //map
-             L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                 maxZoom: 18,
-                 id: 'mapbox.streets',
-                 accessToken: 'pk.eyJ1IjoiZGVicmFzcGFyciIsImEiOiJjazJiNmJ2cDUwMHg5M2NxY29yeGQ0cWowIn0._VZcZvPTCyIjGPjjz3FG7w'
-             }).addTo(mymap);
-             var circle = L.circle([LATITUDE, LONGITUDE], {
-                 color: 'red',
-                 fillColor: '#f03',
-                 fillOpacity: 0.5,
-                 radius: 150
-             }).addTo(mymap);
+            }            
             $.ajax(settings).done(function (result) {
                 var trails = result.trails;
-                 //if no results are rendered - would form into a popup... Unless Poorva already did that
+                console.log(queryURL)
+                // if no results are rendered - would form into a popup... Unless Poorva already did that
                  if (trails.length === 0) {
-                    $('.results').hide()
-                    $('#resultsError').text('City does not have any trails within a 30 mile radius. Please try again!')
-                    console.log('werk')
-                    return
+                    var errorText = $("<p style='color:red;text-align:center;padding:30px;font-size:18px;'>")
+                    .text('City does not have any trails with your filter selection criteria. Please try again!');
+                    $('.searchResults').append(errorText);
                 }
                 for (i = 0; i < trails.length; i++) {
                     var card = $("<div class='card horizontal myCard'>");
@@ -117,7 +105,6 @@ $(document).ready(function () {
                         .attr('data-lon', trails[i].longitude)
                         .attr('data-locale', trails[i].location)
                         .attr('data-name', trails[i].name));
-
 
                     var image = $("<img>");
                     image.attr("src", trails[i].imgSmall);
@@ -161,14 +148,13 @@ $(document).ready(function () {
                     .bindPopup("<b>" + trailName + '<p>Current temp is: ' + temp + '\xB0F').openPopup();
                     mymap.panTo([cityLat, cityLon], 13);
                     })
-
                     //scroll to map on click
                     $('html, body').animate({
                         scrollTop: $("#mapid").offset().top
-                    }, 500);
-                    
+                    }, 500);                    
                 })
             });
+
                 //map
                 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
                     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -182,11 +168,10 @@ $(document).ready(function () {
                     fillOpacity: 0.5,
                     radius: 150
                 }).addTo(mymap);
-
         });
     }
 
-    //localstorage methods
+   // localstorage methods
     var searchedCities = JSON.parse(localStorage.getItem('searchedCities')) || []
 
     function appendSearches() {
@@ -197,26 +182,22 @@ $(document).ready(function () {
             li.attr("data-city", searchedCities[i].name)
             $("#history").prepend(li)
             li.click(function (e) {
-                recall(e.target.innerText)
+                address=e.target.innerText;
+                console.log(address)
+                $('#city').text(address);
+                $('.searchResults').empty()
+                resultCalc('5','1',address)
+                closeNav();
             });
             li.append(searchedCities[i].name);
         }
     }
 
-    function recall(address) {
-        console.log(1)
-        closeNav();
-        searchResults(address);
-    }
-
     //code to trigget search action
     searchButton.click(function (e) {
         e.preventDefault();
-        $('.searchResults').empty()
-        address = searchInput.val();
-        //code for popupmodal for blank searches
-        searchResults(address);
-        //storing in localstorage
+        searchResults('5','1');
+    //storing in localstorage
         var cityObj = {
             name: address
         }
@@ -227,7 +208,7 @@ $(document).ready(function () {
         }
         appendSearches()
     });
-
+    appendSearches()
 });
 
 function openNav() {
