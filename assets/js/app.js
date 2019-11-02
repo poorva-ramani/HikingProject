@@ -4,12 +4,14 @@ var closeButton = document.querySelector(".close-button");
 var modalText = document.querySelector("#modal-text");
 var modalSubtext = document.querySelector("#modal-subtext");
 var i=0;
+
 $(document).ready(function () {
     var searchInput = $('#searchInp');
     var searchButton = $('#searchBtn');
     var trailLength = '';
     var stars = '1';
     var APIKEY = '200624582-ef03dfcbf90f2bd9243bdef3d1acb99b';
+
 
     $(".results").hide();
     $("#filterSearchBtn").on('click', function () {
@@ -30,6 +32,7 @@ $(document).ready(function () {
         else if ($('#rating1').is(':checked')) {
             stars = '1';
         }
+
         searchResults(trailLength.value, stars);
     });
 
@@ -72,25 +75,17 @@ $(document).ready(function () {
                 "url": queryURL,
                 "method": "GET",
             }
-
-            //setting map view point
             var mymap = L.map('mapid').setView([LATITUDE, LONGITUDE], 12)
-            //map
-            L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-                maxZoom: 18,
-                id: 'mapbox.streets',
-                accessToken: 'pk.eyJ1IjoiZGVicmFzcGFyciIsImEiOiJjazJiNmJ2cDUwMHg5M2NxY29yeGQ0cWowIn0._VZcZvPTCyIjGPjjz3FG7w'
-            }).addTo(mymap);
-            var circle = L.circle([LATITUDE, LONGITUDE], {
-                color: 'red',
-                fillColor: '#f03',
-                fillOpacity: 0.5,
-                radius: 150
-            }).addTo(mymap);
 
             $.ajax(settings).done(function (result) {
                 var trails = result.trails;
+                 //if no results are rendered - would form into a popup... Unless Poorva already did that
+                 if (trails.length === 0) {
+                    $('.results').hide()
+                    $('#resultsError').text('City does not have any trails within a 30 mile radius. Please try again!')
+                    console.log('werk')
+                    return
+                }
                 for (i = 0; i < trails.length; i++) {
                     var card = $("<div class='card horizontal myCard'>");
                     var cardimage = $('<div class="card-image">');
@@ -103,10 +98,16 @@ $(document).ready(function () {
                     cardStacked.append(cardContent);
                     cardStacked.append(cardAction);
                     cardAction.append($("<a>").text("SHOW IN MAP")
-                        .addClass('cardLinks'));
+                        .addClass('cardLinks')
+                        .attr('data-lat', trails[i].latitude)
+                        .attr('data-lon', trails[i].longitude)
+                        .attr('data-locale', trails[i].location)
+                        .attr('data-name', trails[i].name));
+
 
                     var image = $("<img>");
                     image.attr("src", trails[i].imgSmall);
+                    image.attr('alt', trails[i].name);
                     cardimage.append(image);
 
                     var name = $("<p class='name'>").text(trails[i].name);
@@ -122,7 +123,52 @@ $(document).ready(function () {
 
                     $('.searchResults').append(card);
                 }
+                 //showing in map on card click
+                 $('.cardLinks').click(function() {
+                    var cityLat = ($(this).attr('data-lat'))
+                    var cityLon = ($(this).attr('data-lon'))
+                    var trailName = ($(this).attr('data-name'));
+                    var locale = ($(this).attr('data-locale'));
+                    var temp = '';
+
+                    $.ajax({
+                        url: 'https://api.openweathermap.org/data/2.5/forecast?q=' + 
+                        locale + '&apikey=df520520403dc5e0455758f5b172bc5e&units=imperial',
+                        method: 'GET',
+                    })
+                    .then(function(data){
+                        temp += data.list[0].main.temp
+                        console.log(temp)
+                    var myRenderer = L.canvas({ padding: 0.5 });
+                    var circleMarker = L.circleMarker([cityLat, cityLon], {
+                        renderer: myRenderer,
+                        color: '#3388ff'
+                    }).addTo(mymap)
+                    .bindPopup("<b>" + trailName + '<p>Current temp is: ' + temp + '\xB0F').openPopup();
+                    mymap.panTo([cityLat, cityLon], 13);
+                    })
+
+                    //scroll to map on click
+                    $('html, body').animate({
+                        scrollTop: $("#mapid").offset().top
+                    }, 500);
+                    
+                })
             });
+                //map
+                L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+                    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                    maxZoom: 18,
+                    id: 'mapbox.streets',
+                    accessToken: 'pk.eyJ1IjoiZGVicmFzcGFyciIsImEiOiJjazJiNmJ2cDUwMHg5M2NxY29yeGQ0cWowIn0._VZcZvPTCyIjGPjjz3FG7w'
+                }).addTo(mymap);
+                var circle = L.circle([LATITUDE, LONGITUDE], {
+                    color: 'red',
+                    fillColor: '#f03',
+                    fillOpacity: 0.5,
+                    radius: 150
+                }).addTo(mymap);
+
         });
     }
 
