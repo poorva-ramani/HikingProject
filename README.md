@@ -1,11 +1,14 @@
 # HikingProject
 
+## Concept
+Create an application that allows users to search for local trails based off user input.
+
 ## Technologies Used
 
-* APis used - 
+* APIs used - 
 Geolocation API for getting current location on page load.
 Hikingproject.com api for getting trails around a city.
-openweathermap API for current weather details, 5 day forecast and UV index.
+openweathermap API for current weather details for the given coordinates of trails.
 Leaflet.js for maps.
 * Git for version controlling.
 * Github for project dashboard, creating issues, Pull-Request etc.
